@@ -6,16 +6,23 @@ spring:
     name: emart-api-gateway
 
 zuul:
+  prefix: /api
   routes:
     emart-user-service:
       path: /user/**
+      sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-user-service
+      strip-prefix: false
     emart-order-service:
       path: /order/**
+      sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-order-service
+      strip-prefix: false
     emart-item-service:
       path: /item/**
+      sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-item-service
+      strip-prefix: false
 
 eureka:
   client:
@@ -23,3 +30,14 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: ${EUREKA_URL}
+
+path-filter:
+  buyer-path:
+    - /api/order/discount/code/**
+    - /api/order/financial/**
+    - /api/order/purchaseHistory/**
+    - /api/item/cart/**
+  seller-path:
+    - /api/order/selling/**
+    - /api/item/emartItem/add
+    - /api/item/emartItem/update
