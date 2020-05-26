@@ -1,0 +1,25 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: emart-api-gateway
+
+zuul:
+  routes:
+    emart-user-service:
+      path: /user/**
+      service-id: emart-user-service
+    emart-order-service:
+      path: /order/**
+      service-id: emart-order-service
+    emart-item-service:
+      path: /item/**
+      service-id: emart-item-service
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9000/eureka
