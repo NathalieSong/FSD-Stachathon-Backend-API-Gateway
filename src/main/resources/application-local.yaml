@@ -4,8 +4,17 @@ server:
 spring:
   application:
     name: emart-api-gateway
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: 
+          true
+      ribbon: 
+        enabled:
+          true
 
 zuul:
+  ignored-services: '*'
   prefix: /api
   routes:
     emart-user-service:
@@ -23,17 +32,26 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-item-service
       strip-prefix: false
+  ribbon-isolation-strategy: THREAD
+  thread-pool:
+    use-separate-thread-pools: true
 
 eureka:
   client:
-    register-with-eureka: false
+    register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:9000/eureka
+      defaultZone: http://localhost:9999/eureka
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
 
 path-filter:
   buyer-path:
-    - /api/order/discount/code/**
+    - /api/order/discount/code
     - /api/order/financial/**
     - /api/order/purchaseHistory/**
     - /api/item/cart/**

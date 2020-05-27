@@ -3,7 +3,7 @@ services:
   emart-api-geteway:
     image: emart-api-gateway:latest
     environment:
-      - EUREKA_URL=http://localhost:9000/eureka
+      - EUREKA_URL=http://localhost:9999/eureka
     deploy:
       mode: replicated
       replicas: 1
