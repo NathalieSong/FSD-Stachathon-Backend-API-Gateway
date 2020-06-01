@@ -11,7 +11,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableZuulProxy
 @EnableFeignClients
-@EnableHystrix
 public class ApiGatewayApplication {
 
 	public static void main(String[] args) {

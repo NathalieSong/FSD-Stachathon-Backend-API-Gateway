@@ -1,6 +1,7 @@
 package com.emart.api.gateway.apigateway.Service;
 
 import com.emart.api.gateway.apigateway.exception.EmartException;
+import com.emart.api.gateway.apigateway.vo.JwtUser;
 import com.emart.api.gateway.apigateway.vo.TokenRequest;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient(name = "emart-user-service")
 @RequestMapping("auth")
 public interface UserServiceFeignClient {
+    @PostMapping("/token")
+    public JwtUser getUserByToken(@RequestBody TokenRequest tokenReq) throws EmartException;
+
     @PostMapping("/buyer")
     public ResponseEntity<?> checkBuyerByToken(@RequestBody TokenRequest tokenReq) throws EmartException;
 

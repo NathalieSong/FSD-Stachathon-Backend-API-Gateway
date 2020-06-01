@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9010
 
 spring:
   application:
@@ -14,27 +14,19 @@ spring:
           true
 
 zuul:
-  ignored-services: "*"
-  prefix: /api
   routes:
     emart-user-service:
       path: /user/**
       sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-user-service
-      strip-prefix: false
     emart-order-service:
       path: /order/**
       sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-order-service
-      strip-prefix: false
     emart-item-service:
       path: /item/**
       sensitiveHeaders: Cookie,Set-Cookie
       service-id: emart-item-service
-      strip-prefix: false
-  ribbon-isolation-strategy: THREAD
-  thread-pool:
-    use-separate-thread-pools: true
 
 eureka:
   client:
@@ -46,16 +38,5 @@ eureka:
 ribbon:
   eureka:
     enabled: true
-  ReadTimeout: 5000
-  ConnectTimeout: 5000
-
-path-filter:
-  buyer-path:
-    - /api/order/discount/code/**
-    - /api/order/financial/**
-    - /api/order/purchaseHistory/**
-    - /api/item/cart/**
-  seller-path:
-    - /api/order/selling/**
-    - /api/item/emartItem/add
-    - /api/item/emartItem/update
+  ReadTimeout: 50000
+  ConnectTimeout: 50000
