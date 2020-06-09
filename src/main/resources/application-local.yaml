@@ -33,7 +33,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_URI:http://localhost:9999/eureka/}
+      defaultZone: ${EUREKA_URL:http://localhost:9999/eureka/}
 
 ribbon:
   eureka:
